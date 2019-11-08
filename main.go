@@ -1,7 +1,14 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+
+	routes "github.com/nickzaro/facturacion-go-restapi/routers"
+)
 
 func main() {
-	fmt.Printf("Iniciando el proyecto")
+	// routers.IniciarRutas()
+	fmt.Printf("Iniciando el servidor")
+	routes.IniciarServidor()
+
 }
