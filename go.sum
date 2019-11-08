@@ -1,2 +1,9 @@
+github.com/eduardogpg/gonv v0.0.0-20170424170749-4299ebc60ef2 h1:eME1Y2OK4YQYT/1HA0t4jtohRIOlosj01Dm5ZCLJaZQ=
+github.com/eduardogpg/gonv v0.0.0-20170424170749-4299ebc60ef2/go.mod h1:M1hF1eWJax2rUfHsLrnX61jlFVCcUC7A6/kkIbeYzLU=
+github.com/fmorenovr/gonv v0.0.0-20190819173827-e69b167d2387 h1:dC3BCmQdfEF7TXexpD6jz+VWHHa0xEGFcYHu2mj6BJM=
+github.com/fmorenovr/gonv v0.0.0-20190819173827-e69b167d2387/go.mod h1:5wdGsDdvlNJso/rWzVlvOIp5pQ4mcGSkNVkEu4aes54=
 github.com/gorilla/mux v1.7.3 h1:gnP5JzjVOuiZD07fKKToCAOjS0yOpj/qPETTXCCS6hw=
 github.com/gorilla/mux v1.7.3/go.mod h1:1lud6UwP+6orDFRuTfBEV8e9/aOM/c4fVVCaMa2zaAs=
+github.com/jenazads/gonv v0.0.0-20190819173827-e69b167d2387/go.mod h1:NRM8E+K0L73I5xkVNzUCqj4t6ZH2HloX6kq3lsq19/A=
+github.com/jenazads/goutils v0.0.0-20190819174130-fb071435caeb h1:y6KTSfeM9aUG2RwtHceNt6TNll+Qf8AR7IVphS9nib0=
+github.com/jenazads/goutils v0.0.0-20190819174130-fb071435caeb/go.mod h1:CCJDb0H3Ku9clMVoUfqIGrmHu6UDVc2jH96FKX+VGi4=

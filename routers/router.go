@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
+	"github.com/nickzaro/facturacion-go-restapi/config"
 	"github.com/nickzaro/facturacion-go-restapi/handlers"
 )
 
@@ -23,5 +24,5 @@ func iniciarRutas() *mux.Router {
 
 //IniciarServidor carga las rutas e inicia el servidor
 func IniciarServidor() {
-	log.Fatal(http.ListenAndServe(":8000", iniciarRutas()))
+	log.Fatal(http.ListenAndServe(config.URLServer(), iniciarRutas()))
 }
