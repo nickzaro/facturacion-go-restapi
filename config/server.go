@@ -31,3 +31,8 @@ func (srv *ServerConfig) url() string {
 func URLServer() string {
 	return server.url()
 }
+
+// PortSever devuelve el puerto del servidor
+func PortSever() int {
+	return server.port
+}
