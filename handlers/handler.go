@@ -1,18 +1,40 @@
 package handlers
 
 import (
+	"encoding/json"
 	"fmt"
 	"net/http"
+
+	"github.com/nickzaro/facturacion-go-restapi/controllers"
+	"github.com/nickzaro/facturacion-go-restapi/models"
 )
 
 // PostDeEvento maneja el post de los eventos
 func PostDeEvento(w http.ResponseWriter, r *http.Request) {
+	// recibimos el json
+	var eventpost models.EventPost
+	_ = json.NewDecoder(r.Body).Decode(&eventpost)
+	// se procesaria la informacion y devuelve
+	controllers.ProcesarEventPost(eventpost)
+	json.NewEncoder(w).Encode(eventpost)
+	//Aca procesar
+
 	fmt.Fprintf(w, "PostDeEvento")
 }
 
-// PostDePagos maneja el post de pagos
-func PostDePagos(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "PostDePagos")
+// PostDePago maneja el post de pagos
+func PostDePago(w http.ResponseWriter, r *http.Request) {
+
+	// recibimos el json
+	var pagopost models.PagoPost
+	_ = json.NewDecoder(r.Body).Decode(&pagopost)
+
+	// se procesaria la informacion y devuelve
+	//otroPagopost, _ := controllers.ProcesarPagoPost(pagopost)
+	json.NewEncoder(w).Encode(pagopost)
+	//Aca procesar
+
+	//fmt.Fprintf(w, "PostDePagos")
 }
 
 // GetDeCargos maneja el get de cargos
