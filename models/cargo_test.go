@@ -14,7 +14,7 @@ func TestConstruirCargo(t *testing.T) {
 		car.FechaCargo == even.Date &&
 		car.Categoria == categorias[even.EventType] &&
 		car.Subcategoria == even.EventType &&
-		car.MontoCargo == even.Amount &&
+		car.MontoCargo == utils.ConvertirAPesos(even.Amount, even.Currency) &&
 		car.EventoID == even.EventID &&
 		car.PagosAsociados == nil) {
 		t.Error("Error en TestConstruirPago")

@@ -25,8 +25,8 @@ func TestAgregarCargoFactura(t *testing.T) {
 		t.Error("No agrego bien el saldo de cargo a usuario")
 	}
 	existe := false
-	for i := range fac.Cargos {
-		if fac.Cargos[i] == car.Referencia {
+	for i := range fac.ReferenciaCargos {
+		if fac.ReferenciaCargos[i].IDReferenciaCargo == car.Referencia {
 			existe = true
 		}
 	}

@@ -19,6 +19,7 @@ type Cargo struct {
 	Categoria      string               `bson:"categoria" json:"categoria"`
 	Subcategoria   string               `bson:"subcategoria" json:"subcategoria"`
 	MontoCargo     float64              `bson:"monto_cargo" json:"monto_cargo"`
+	MontoPendiente float64              `bson:"monto_pendiente" json:"monto_pendiente"`
 	EventoID       int                  `bson:"evento_id" json:"evento_id"`
 	PagosAsociados []primitive.ObjectID `bson:"pagos_asociados" json:"pagos_asociados"`
 }
@@ -57,6 +58,7 @@ func (car *Cargo) Construir(eventPost EventPost) {
 	car.Categoria = categorias[eventPost.EventType]
 	car.Subcategoria = eventPost.EventType
 	car.MontoCargo = utils.ConvertirAPesos(eventPost.Amount, eventPost.Currency)
+	car.MontoPendiente = car.MontoCargo // al inicio el monto pendiente es el total
 	car.EventoID = eventPost.EventID
 	car.PagosAsociados = nil
 }
@@ -71,4 +73,40 @@ func (car *Cargo) Almacenar() {
 		log.Fatal(err)
 	}
 	fmt.Println("Inserted a single document Cargo: ", insertResult.InsertedID)
+}
+
+// Pagar realiza un pago parcial o total usando un pago
+func (car *Cargo) Pagar(pago *Pago) float64 {
+
+	montoPagado := 0.00
+	if car.MontoPendiente == 0 {
+		return montoPagado
+	}
+	if car.MontoPendiente > pago.MontoPendiente {
+		montoPagado = car.MontoPendiente - pago.MontoPendiente
+		car.MontoPendiente = montoPagado
+		pago.MontoPendiente = 0
+	} else if car.MontoPendiente < pago.MontoPendiente {
+		montoPagado = pago.MontoPendiente - car.MontoPendiente
+		pago.MontoPendiente = montoPagado
+		car.MontoPendiente = 0
+	} else {
+		montoPagado = pago.MontoPendiente
+		car.MontoPendiente = 0
+		pago.MontoPendiente = 0
+	}
+	fmt.Println("PAGANDO CARGO CON EL MONTO INGRESADO")
+	car.AsociarPago(pago)
+	pago.AsociarCargo(*car) //TODO ver si hay problemas con el puntero
+	fmt.Println(pago)
+	return montoPagado // el monto que paga el pago
+}
+
+func (car *Cargo) AsociarPago(pago *Pago) {
+	car.PagosAsociados = append(car.PagosAsociados, pago.Referencia)
+}
+
+// CargarDeReferencia cargar un Cargo usando el _id
+func (car *Cargo) CargarDeReferencia(refFac primitive.ObjectID) {
+	DataBaseCollection().FindOne(context.TODO(), bson.D{{"_id", refFac}}).Decode(&car)
 }

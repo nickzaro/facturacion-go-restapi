@@ -9,7 +9,7 @@ import (
 var pagopost PagoPost
 
 func init() {
-	pagopost = PagoPost{150.10, "USD", 1}
+	pagopost = PagoPost{100.10, "USD", 1}
 }
 
 func TestConstruirPago(t *testing.T) {

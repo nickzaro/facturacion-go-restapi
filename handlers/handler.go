@@ -30,7 +30,7 @@ func PostDePago(w http.ResponseWriter, r *http.Request) {
 	_ = json.NewDecoder(r.Body).Decode(&pagopost)
 
 	// se procesaria la informacion y devuelve
-	//otroPagopost, _ := controllers.ProcesarPagoPost(pagopost)
+	controllers.ProcesarPagoPost(pagopost)
 	json.NewEncoder(w).Encode(pagopost)
 	//Aca procesar
 

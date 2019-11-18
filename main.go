@@ -9,7 +9,7 @@ import (
 func main() {
 
 	//controllers.Xmain()
-	fmt.Printf("Iniciando el servidor")
+	fmt.Printf("Iniciando el servidor\n")
 	routes.IniciarServidor()
 
 }
