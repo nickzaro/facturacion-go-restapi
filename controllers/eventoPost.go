@@ -14,8 +14,8 @@ func ProcesarEventPost(eventpost models.EventPost) models.EventPost {
 	var car models.Cargo
 	car.Construir(eventpost)
 	// A
-	fac.AgregarCargo(car)         //guarda la ref de cargo en factura
-	usr.AgregarSaldoPorCargo(car) //actualiza monto cargo en usuario
+	fac.AgregarCargo(car)            //guarda la ref de cargo en factura
+	usr.ActualizarPorCargo(fac, car) //actualiza monto cargo en usuario
 	//-A
 	// este orden de almacenamiento es indistinto pero tienen que guardarse los 3
 	car.Almacenar() //guarda en la BD el cargo

@@ -81,6 +81,7 @@ func (fac *Factura) Pagar(pago *Pago) float64 {
 			cargo.CargarDeReferencia(refCargo.IDReferenciaCargo)
 			montoPagado = montoPagado + cargo.Pagar(pago)
 			cargo.Almacenar()
+			fmt.Printf("ESTO AGREGA A FAC.PAGOFACTURA %f\n", montoPagado)
 			if cargo.MontoPendiente == 0 {
 				fac.ReferenciaCargos[idx].EstaCancelado = true
 			}
@@ -91,9 +92,7 @@ func (fac *Factura) Pagar(pago *Pago) float64 {
 		}
 	}
 	fac.Pagofactura = fac.Pagofactura + montoPagado
-	if fac.CargoFactura == fac.Pagofactura {
-		// factura cancelafada completamente
-	}
+
 	return montoPagado
 }
 

@@ -54,9 +54,21 @@ func (usr *Usuario) AgregarFactura(fac Factura) {
 	usr.ReferenciaFacturas = append(usr.ReferenciaFacturas, refFac)
 }
 
-// AgregarCambiosPorCargo agrega a la deuda del usuario el monto del cargo ingresado
-func (usr *Usuario) AgregarSaldoPorCargo(car Cargo) {
+// ActualizarPorCargo agrega a la deuda del usuario el monto del cargo ingresado
+func (usr *Usuario) ActualizarPorCargo(fac Factura, car Cargo) {
 	usr.CargoUsuario += car.MontoCargo
+	usr.actualizarEstadoFactura(fac, car)
+}
+
+//  actualizarEstadoFactura actualizo el estado de la factura en referencia factura segun el cambio ingresado
+func (usr *Usuario) actualizarEstadoFactura(fac Factura, car Cargo) {
+	for idx, refFac := range usr.ReferenciaFacturas {
+		// me aseguro que es la factura donde ingrese el cargo ademas de que el cargo sea mayor a pago
+		if refFac.PeriodoFactura == car.MesAnioFactura &&
+			fac.CargoFactura > fac.Pagofactura && fac.MesAnioFactura == car.MesAnioFactura {
+			usr.ReferenciaFacturas[idx].EstaCancelado = false
+		}
+	}
 }
 
 // BuscarUsuario busca el usuario en la base de datos si no la encuentro, contruyo con los datos

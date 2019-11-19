@@ -83,12 +83,12 @@ func (car *Cargo) Pagar(pago *Pago) float64 {
 		return montoPagado
 	}
 	if car.MontoPendiente > pago.MontoPendiente {
-		montoPagado = car.MontoPendiente - pago.MontoPendiente
-		car.MontoPendiente = montoPagado
+		montoPagado = pago.MontoPendiente
+		car.MontoPendiente = car.MontoPendiente - montoPagado
 		pago.MontoPendiente = 0
 	} else if car.MontoPendiente < pago.MontoPendiente {
-		montoPagado = pago.MontoPendiente - car.MontoPendiente
-		pago.MontoPendiente = montoPagado
+		montoPagado = car.MontoPendiente
+		pago.MontoPendiente = pago.MontoPendiente - montoPagado
 		car.MontoPendiente = 0
 	} else {
 		montoPagado = pago.MontoPendiente
